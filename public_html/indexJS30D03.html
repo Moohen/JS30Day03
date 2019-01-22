@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+  <link rel="stylesheet" href="styleJS30D03.css">
+</head>
+<body>
+  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ffc600">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <script>
+    const inputs = document.querySelectorAll('.controls input'); // zmienna stała "inputs" została przypisana do klasy .controls oraz klasy .input
+
+    function handleUpdate() { // fukcja handleUpdate() pozwala na zmianę wartości dla Blur, Spacing oraz Color, które zostały powiązane z elementem "img" 
+      const suffix = this.dataset.sizing || ''; // zmiennej stałej "suffix" przypisano właściwość dataset, której wartość określono na dwa możliwe sposoby, pierwszy, przez data-sizing, czyli "px", a drugi, to puste pole
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); // dla obiektu(jego dziecka) posiadającego właściwość "name" ustawia nową wartość oraz dodaje zmienną stałą "suffix"
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate)); // dla każdej zmiennej stałej "inpust" została przypisana funkcja "input", która nasłuchuje zmiany w fukcji "handleUpdate"
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate)); // dla każdej zmiennej stałej "inpust" została przypisana funkcja "input", która nasłuchuje ruchu myszki w fukcji "handleUpdate"
+  </script>
+
+
+</body>
+</html>
